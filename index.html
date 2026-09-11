@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLIKMARKET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05070A;
+    --surface:#0C1210;
+    --surface-2:#111917;
+    --border:#1E2A26;
+    --text:#F2F5F4;
+    --text-muted:#8B9894;
+
+    --hijau:#34D399;
+    --hijau-soft:rgba(52,211,153,.12);
+    --biru:#38BDF8;
+    --biru-soft:rgba(56,189,248,.12);
+    --emas:#F2B93B;
+    --emas-soft:rgba(242,185,59,.12);
+
+    --sold:#6B7570;
+    --radius-card:16px;
+    --radius-pill:999px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Manrope', system-ui, sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Rajdhani','Manrope',sans-serif; font-weight:700;
+    letter-spacing:.2px; margin:0;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  :focus-visible{outline:2px solid var(--hijau); outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:40;
+    background:rgba(5,7,10,.9); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; gap:20px;}
+  .brand-name{
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-size:21px; letter-spacing:.3px;
+    background:linear-gradient(90deg, var(--hijau), #7FF3C6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  nav.links{display:flex; align-items:center; gap:26px;}
+  .btn-support{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:9px 16px; border-radius:var(--radius-pill);
+    border:1px solid rgba(52,211,153,.5); color:var(--hijau);
+    font-size:14px; font-weight:700; background:var(--hijau-soft);
+  }
+  @media (max-width:600px){
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:60px 0 36px; text-align:center; border-bottom:1px solid var(--border);}
+  .eyebrow{
+    display:inline-block; padding:7px 16px; border-radius:var(--radius-pill);
+    border:1px solid rgba(52,211,153,.45); color:var(--hijau); font-size:12.5px;
+    font-weight:700; letter-spacing:.4px; background:var(--hijau-soft); margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(28px,4.4vw,46px); line-height:1.1; max-width:16ch; margin:0 auto;}
+  .hero h1 .accent{color:var(--hijau);}
+  .hero p.lede{
+    color:var(--text-muted); font-size:16px; max-width:52ch; margin:18px auto 0;
+  }
+
+  /* ---------- Filters ---------- */
+  .filters{
+    display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:30px;
+  }
+  .pill{
+    padding:9px 18px; border-radius:var(--radius-pill); font-size:13.5px; font-weight:700;
+    background:transparent; border:1px solid var(--border); color:var(--text-muted);
+    cursor:pointer; transition:all .15s; letter-spacing:.3px;
+  }
+  .pill:hover{color:var(--text);}
+  .pill[data-tier="semua"].active{background:var(--hijau-soft); border-color:var(--hijau); color:var(--hijau);}
+  .pill[data-tier="hijau"].active{background:var(--hijau-soft); border-color:var(--hijau); color:var(--hijau);}
+  .pill[data-tier="biru"].active{background:var(--biru-soft); border-color:var(--biru); color:var(--biru);}
+  .pill[data-tier="emas"].active{background:var(--emas-soft); border-color:var(--emas); color:var(--emas);}
+
+  /* ---------- Grid ---------- */
+  .catalog{padding:40px 0 64px;}
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--surface); border-radius:var(--radius-card);
+    padding:18px; display:flex; flex-direction:column; gap:14px;
+    border:1px solid var(--border);
+  }
+  .card[data-tier="hijau"]{border-color:rgba(52,211,153,.4);}
+  .card[data-tier="biru"]{border-color:rgba(56,189,248,.4);}
+  .card[data-tier="emas"]{border-color:rgba(242,185,59,.4);}
+  .card.is-sold{opacity:.55;}
+
+  .card-top{display:flex; justify-content:space-between; align-items:center;}
+  .badge{
+    font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:var(--radius-pill);
+    letter-spacing:.3px;
+  }
+  .badge-ready{background:var(--hijau-soft); color:var(--hijau); border:1px solid rgba(52,211,153,.4);}
+  .badge-sold{background:rgba(107,117,112,.15); color:var(--sold); border:1px solid rgba(107,117,112,.4);}
+  .card[data-tier="biru"] .badge-ready{background:var(--biru-soft); color:var(--biru); border-color:rgba(56,189,248,.4);}
+  .card[data-tier="emas"] .badge-ready{background:var(--emas-soft); color:var(--emas); border-color:rgba(242,185,59,.4);}
+  .badge-code{border:1px solid var(--border); color:var(--text-muted);}
+  .card[data-tier="hijau"] .badge-code{color:var(--hijau); border-color:rgba(52,211,153,.4);}
+  .card[data-tier="biru"] .badge-code{color:var(--biru); border-color:rgba(56,189,248,.4);}
+  .card[data-tier="emas"] .badge-code{color:var(--emas); border-color:rgba(242,185,59,.4);}
+
+  .card-photo{
+    aspect-ratio:4/5; background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    padding:10px; position:relative; overflow:hidden; cursor:pointer; border:none;
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-size:22px; color:var(--text);
+    transition:filter .15s;
+    margin:-18px -18px 0 -18px; width:calc(100% + 36px);
+    border-radius:var(--radius-card) var(--radius-card) 0 0;
+  }
+  .photo-badges{
+    position:absolute; top:10px; left:10px; right:10px; z-index:2;
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  .card-photo:hover{filter:brightness(1.12);}
+  .card-photo img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+  .card[data-tier="hijau"] .card-photo{color:var(--hijau);}
+  .card[data-tier="biru"] .card-photo{color:var(--biru);}
+  .card[data-tier="emas"] .card-photo{color:var(--emas);}
+
+  .card-title{font-size:16.5px; font-weight:700; font-family:'Rajdhani',sans-serif;}
+  .card-tier-label{font-size:11.5px; font-weight:700; letter-spacing:.2px; margin-top:-8px;}
+  .card[data-tier="hijau"] .card-tier-label{color:var(--hijau);}
+  .card[data-tier="biru"] .card-tier-label{color:var(--biru);}
+  .card[data-tier="emas"] .card-tier-label{color:var(--emas);}
+
+  .badges-row{display:flex; gap:6px; flex-wrap:wrap;}
+  .badge-pill{
+    font-size:11px; font-weight:600; padding:5px 10px; border-radius:var(--radius-pill);
+    border:1px solid var(--border); color:var(--text-muted); white-space:nowrap;
+  }
+  .card[data-tier="hijau"] .badge-pill{border-color:rgba(52,211,153,.35); color:var(--hijau);}
+  .card[data-tier="biru"] .badge-pill{border-color:rgba(56,189,248,.35); color:var(--biru);}
+  .card[data-tier="emas"] .badge-pill{border-color:rgba(242,185,59,.35); color:var(--emas);}
+
+  .card-price{
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-size:24px; text-align:center;
+    padding-top:2px; display:flex; flex-direction:column; align-items:center; gap:2px;
+  }
+  .price-row{display:flex; align-items:center; gap:8px;}
+  .price-old{
+    font-family:'Manrope',sans-serif; font-weight:600; font-size:13px;
+    color:var(--text-muted); text-decoration:line-through;
+  }
+  .discount-badge{
+    font-size:11px; font-weight:700; padding:3px 8px; border-radius:var(--radius-pill);
+    background:rgba(242,90,90,.15); color:#F25A5A; border:1px solid rgba(242,90,90,.4);
+  }
+
+  .btn-secondary{
+    display:block; text-align:center; padding:11px 12px; border-radius:10px;
+    border:1px solid var(--border); color:var(--text); font-size:13.5px; font-weight:600;
+  }
+  .btn-secondary:hover{border-color:var(--text-muted);}
+  .btn-buy{
+    display:block; text-align:center; padding:12px 12px; border-radius:10px;
+    font-weight:700; font-size:14px;
+  }
+  .card[data-tier="hijau"] .btn-buy{background:var(--hijau); color:#04150E;}
+  .card[data-tier="biru"] .btn-buy{background:var(--biru); color:#031722;}
+  .card[data-tier="emas"] .btn-buy{background:var(--emas); color:#241902;}
+  .card.is-sold .btn-buy, .card.is-sold .btn-secondary{pointer-events:none; opacity:.5;}
+
+  .empty-state{
+    text-align:center; padding:60px 20px; color:var(--text-muted); font-size:15px;
+    grid-column:1/-1;
+  }
+
+  /* ---------- Modal detail ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(3,4,6,.78); z-index:100;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--surface); border:1px solid var(--border); border-radius:20px;
+    width:100%; max-width:820px; max-height:88vh; overflow-y:auto; padding:26px;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%;
+    border:1px solid var(--border); background:var(--surface-2); color:var(--text);
+    font-size:16px; cursor:pointer; line-height:1;
+  }
+  .modal-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:26px; margin-top:6px;}
+  @media (max-width:680px){.modal-grid{grid-template-columns:1fr;}}
+  .modal-photo{
+    aspect-ratio:4/5; border-radius:14px; background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    padding:10px; position:relative; overflow:hidden; font-family:'Rajdhani',sans-serif;
+    font-weight:700; font-size:22px;
+  }
+  .modal-photo img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+  .modal-photo .badge-code{position:absolute; top:12px; left:12px; z-index:1;}
+  .modal-tier-label{font-size:12.5px; font-weight:700; letter-spacing:.2px;}
+  .modal-title{font-size:22px; margin-top:6px;}
+  .modal-badges{margin-top:12px;}
+  .modal-detail{display:flex; flex-direction:column; gap:8px; margin-top:16px;}
+  .detail-row{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--surface-2); border-radius:10px; padding:10px 14px; font-size:13.5px;
+  }
+  .detail-row .left{display:flex; align-items:center; gap:9px; color:var(--text-muted);}
+  .detail-row .value{font-weight:700;}
+  .modal-price-label{font-size:12.5px; color:var(--text-muted); margin-top:18px;}
+  .modal-price-row{display:flex; align-items:center; gap:10px;}
+  .modal-price{font-family:'Rajdhani',sans-serif; font-weight:700; font-size:28px;}
+  .modal-price-old{
+    font-family:'Manrope',sans-serif; font-weight:600; font-size:15px;
+    color:var(--text-muted); text-decoration:line-through;
+  }
+  .modal-buy{
+    display:block; text-align:center; padding:13px 12px; border-radius:10px;
+    font-weight:700; font-size:14.5px; margin-top:14px;
+  }
+
+  /* ---------- Keamanan Akun section ---------- */
+  .section{padding:46px 0;}
+  .section + .section{border-top:1px solid var(--border);}
+  .section-title{font-size:clamp(20px,3vw,26px); margin-bottom:6px;}
+  .section-lede{color:var(--text-muted); font-size:14.5px; margin-bottom:30px; max-width:60ch;}
+  .konami-btn{
+    display:inline-flex; align-items:center; gap:8px; margin-top:8px;
+    padding:11px 20px; border-radius:var(--radius-pill); background:var(--hijau);
+    color:#04150E; font-weight:700; font-size:14.5px;
+  }
+  .step-item{display:grid; grid-template-columns:42px 1fr; gap:16px; margin-bottom:30px;}
+  .step-num{
+    width:36px; height:36px; border-radius:50%; background:var(--hijau-soft);
+    color:var(--hijau); display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:'Rajdhani',sans-serif; font-size:15px;
+  }
+  .step-content h3{font-size:16px; margin-bottom:4px;}
+  .step-content p{color:var(--text-muted); font-size:14px; margin:0 0 12px;}
+  .step-content img{border-radius:12px; border:1px solid var(--border); max-width:420px;}
+  .callout{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:16px 18px; font-size:13.5px; color:var(--text-muted); margin:8px 0 10px;
+  }
+  .callout b{color:var(--text);}
+
+  /* ---------- Strip "Sudah Terjual" (auto berjalan) ---------- */
+  .marquee-wrap{
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+    mask-image:linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+  }
+  .marquee-track{
+    display:flex; gap:16px; width:max-content;
+    animation:marqueeScroll 15s linear infinite;
+  }
+  .marquee-track:hover{animation-play-state:paused;}
+  @keyframes marqueeScroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-100%);}
+  }
+  .mini-card{
+    flex-shrink:0; width:170px; padding:10px 10px 10px 10px; border-radius:12px;
+    background:var(--surface); border:1px solid var(--border);
+  }
+  .mini-card[data-tier="hijau"]{border-color:rgba(52,211,153,.35);}
+  .mini-card[data-tier="biru"]{border-color:rgba(56,189,248,.35);}
+  .mini-card[data-tier="emas"]{border-color:rgba(242,185,59,.35);}
+  .mini-card[data-tier="hijau"] .badge-code{color:var(--hijau); border-color:rgba(52,211,153,.4);}
+.mini-card[data-tier="biru"] .badge-code{color:var(--biru); border-color:rgba(56,189,248,.4);}
+.mini-card[data-tier="emas"] .badge-code{color:var(--emas); border-color:rgba(242,185,59,.4);}
+  .mini-card[data-tier="hijau"] .badge-sold{background:var(--hijau-soft); color:var(--hijau); border-color:rgba(52,211,153,.4);}
+.mini-card[data-tier="biru"] .badge-sold{background:var(--biru-soft); color:var(--biru); border-color:rgba(56,189,248,.4);}
+.mini-card[data-tier="emas"] .badge-sold{background:var(--emas-soft); color:var(--emas); border-color:rgba(242,185,59,.4);}
+  .mini-card-top{
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;
+  }
+  .mini-photo{
+    aspect-ratio:4/5; border-radius:9px; background:var(--surface-2);
+    margin-bottom:9px; position:relative; overflow:hidden;
+}
+.mini-photo img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+  .mini-card-title{font-size:14px; font-weight:700; font-family:'Rajdhani',sans-serif;}
+  .mini-card-tier{font-size:11px; margin-top:3px; color:var(--text-muted);}
+  .mini-card[data-tier="hijau"] .mini-card-tier{color:var(--hijau);}
+  .mini-card[data-tier="biru"] .mini-card-tier{color:var(--biru);}
+  .mini-card[data-tier="emas"] .mini-card-tier{color:var(--emas);}
+
+  /* ---------- Footer ---------- */
+  footer.site{border-top:1px solid var(--border); background:var(--surface); padding:56px 0 28px; text-align:center;}
+  footer.site h2{font-size:clamp(22px,3vw,30px);}
+  footer.site p.lede{color:var(--text-muted); font-size:15px; max-width:48ch; margin:14px auto 26px;}
+  .contact-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .contact-btn{
+    padding:12px 22px; border-radius:var(--radius-pill); font-weight:700; font-size:14px;
+  }
+  .contact-btn.wa{background:var(--hijau); color:#04150E;}
+  .contact-btn.ig{background:var(--surface-2); color:var(--text); border:1px solid var(--border);}
+  .contact-btn.tg{background:transparent; color:var(--biru); border:1px solid rgba(56,189,248,.5);}
+  .footer-bottom{margin-top:38px; color:var(--text-muted); font-size:12.5px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav wrap">
+    <span class="brand-name">KLIKMARKETOFFICIAL</span>
+    <a class="btn-support" href="https://linktr.ee/klikstoreid" target="_blank" rel="noopener"> <span class="label">Linktree Atmin</span></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">KATALOG RESMI · UPDATE HARIAN</span>
+    <h1>Akun <span class="accent">eFootball</span> Premium Siap Pakai</h1>
+    <p class="lede">Semua akun dicek langsung oleh admin sebelum masuk katalog. Pilih kategori sesuai budget kamu, transaksi aman via WhatsApp.</p>
+
+    <div class="filters" id="tierFilters">
+      <button class="pill active" data-tier="semua">SEMUA KATALOG</button>
+      <button class="pill" data-tier="hijau">KATALOG HIJAU</button>
+      <button class="pill" data-tier="biru">KATALOG BIRU</button>
+      <button class="pill" data-tier="emas">KATALOG EMAS</button>
+    </div>
+  </div>
+</section>
+
+<section class="catalog" id="katalog">
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="section" id="soldSection">
+  <div class="wrap">
+    <h2 class="section-title">Riwayat Penjualan</h2>
+    <p class="section-lede">Sebagian akun yang sudah laku terjual — bukti kalau toko ini aktif dan transaksinya nyata.</p>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <h2>Butuh Bantuan Transaksi?</h2>
+    <p class="lede">Tim support kami siap membantu proses pembelian dari awal sampai akun aman di tangan kamu.</p>
+    <div class="contact-row">
+      <a class="contact-btn wa" id="waFooterBtn" href="#" target="_blank" rel="noopener">WhatsApp Admin</a>
+      <a class="contact-btn ig" href="#" target="_blank" rel="noopener">Instagram Support</a>
+      <a class="contact-btn tg" href="#" target="_blank" rel="noopener">Telegram Support</a>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> eFootball Account Store. Seluruh hak cipta dilindungi.</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="Tutup">✕</button>
+    <div class="modal-grid" id="modalGrid"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   PENGATURAN TOKO — ganti sesuai kebutuhan kamu
+   ========================================================= */
+const CONFIG = {
+  waNumber: "6285123685805", // format 62xxxxxxxxxx, tanpa tanda +
+};
+
+/* =========================================================
+   DATA PRODUK
+   ---------------------------------------------------------
+   Setiap akun adalah satu objek di dalam array "accounts" di bawah.
+   Field yang WAJIB ada di tiap akun:
+     kode      -> kode unik, contoh "EF-01"
+     tier      -> salah satu dari: "hijau", "biru", "emas"
+     status    -> salah satu dari: "ready", "terjual"
+     nama      -> nama produk, contoh "Starter Squad — Budget"
+     (kotak foto sekarang kosong/placeholder polos — nanti kalau sudah
+     ada foto asli, ganti kotak <div class="card-photo"> di bagian
+     render/JS dengan tag <img src="...">, foto otomatis mengisi
+     penuh kotak rasio 4:5 dan bagian berlebih terpotong rapi)
+     badges    -> PAS 3 item, tampil sebagai pil kecil di kartu,
+                  contoh: "Rating SS 3180+", "5 Epic Boosters"
+     detail    -> daftar detail LENGKAP yang muncul saat foto diklik
+                  (pop-up), bebas berapa baris. Tiap baris: emoji/ikon,
+                  label, dan value.
+     harga     -> harga jual sekarang (angka saja, tanpa titik/Rp).
+                  Ini yang tampil besar dan mencolok.
+     hargaAsli -> OPSIONAL. Isi kalau produk ini lagi diskon — nanti
+                  harga ini otomatis tampil dicoret + muncul badge
+                  persentase diskon. Kalau tidak mau diskon, hapus
+                  baris ini (atau kosongkan) di akun tersebut.
+     fotoLink  -> link Google Drive / album foto lengkap (buat tombol
+                  "Lihat Foto Full Spek")
+     foto      -> OPSIONAL. Link foto utama akun (yang tampil di kotak
+                  grid & pop-up). Kalau dikosongkan (""), kotaknya
+                  otomatis tetap tampil polos kayak sekarang. Isi
+                  dengan "direct image link" (bukan link Google Drive
+                  biasa) dari postimages.org / imgur.com, contoh:
+                  "https://i.postimg.cc/xxxxxx/nama-file.jpg"
+
+   Contoh menambah baris detail baru di pop-up:
+     { icon: "🎮", label: "Platform", value: "Mobile & Konsol" }
+   ========================================================= */
+const accounts = [
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "ready",
+    nama: "Koller x Salah Blitz",
+    foto: "https://i.postimg.cc/rwsQgHJn/downloadgram-org-789424897-17946536148276126-2704691725162922147-n.webp",
+    badges: ["Rating SS 3180+", "5 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔒", label: "Login", value: "Konami ID" },
+      { icon: "📱", label: "Sisa Login", value: "10" },
+      { icon: "🌐", label: "Region", value: "Indonesia" },
+      { icon: "🎮", label: "GP/IOS", value: "All Kosong" },
+    ],
+    harga: 45000,
+    hargaAsli: 60000,
+    fotoLink: "https://drive.google.com/drive/folders/1Aumi4jE9IHJOAN4EyaKD570O9Mxt_8GO?usp=drive_link",
+  },
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "ready",
+    nama: "Mid-Tier Squad — Pro",
+    foto: "https://i.ibb.co/5gC1Hwvw/20260911-200239.jpg",
+    badges: ["Rating SS 3350+", "18 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔒", label: "Login", value: "Konami ID" },
+      { icon: "📱", label: "Sisa Login", value: "4" },
+      { icon: "🌐", label: "Region", value: "Indonesia" },
+      { icon: "🎮", label: "GP/IOS", value: "All Kosong" },
+    ],
+    harga: 70000,
+    hargaAsli: 90000,
+    fotoLink: "https://drive.google.com/drive/folders/1OshIOtfYppkoGRXCsCCo7Gda7yuRZFJc?usp=drive_link",
+  },
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "terjual",
+    nama: "Goat Ronaldo BigTime",
+    foto: "https://i.postimg.cc/t4J2Dc5L/downloadgram-org-788948612-17946568929276126-1394408152559351190-n.webp",
+    badges: ["Rating SS 3050+", "3 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔑", label: "Login", value: "Konami ID + Email Fresh" },
+      { icon: "🌍", label: "Region", value: "Global (Asia)" },
+      { icon: "📱", label: "Google Play", value: "Bisa Login" },
+      { icon: "🍎", label: "iOS", value: "Bisa Login" },
+    ],
+    harga: 380000,
+    fotoLink: "#",
+  },
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "terjual",
+    nama: "Buffon BigTime",
+    foto: "https://i.postimg.cc/Vkh4hFGg/downloadgram-org-789424906-17946692895276126-8032380738836207033-n.webp",
+    badges: ["Rating SS 3050+", "3 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔑", label: "Login", value: "Konami ID + Email Fresh" },
+      { icon: "🌍", label: "Region", value: "Global (Asia)" },
+      { icon: "📱", label: "Google Play", value: "Bisa Login" },
+      { icon: "🍎", label: "iOS", value: "Bisa Login" },
+    ],
+    harga: 380000,
+    fotoLink: "#",
+  },
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "terjual",
+    nama: "Thuram x Figo",
+    foto: "https://i.postimg.cc/P5J2K744/downloadgram-org-789748867-17946536376276126-7174650176642190034-n.webp",
+    badges: ["Rating SS 3050+", "3 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔑", label: "Login", value: "Konami ID + Email Fresh" },
+      { icon: "🌍", label: "Region", value: "Global (Asia)" },
+      { icon: "📱", label: "Google Play", value: "Bisa Login" },
+      { icon: "🍎", label: "iOS", value: "Bisa Login" },
+    ],
+    harga: 380000,
+    fotoLink: "#",
+  },
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "terjual",
+    nama: "Ibra x Dani Olmo",
+    foto: "https://i.postimg.cc/RZhXGYRP/downloadgram-org-790225717-17946537315276126-1942343973328758387-n.webp",
+    badges: ["Rating SS 3050+", "3 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔑", label: "Login", value: "Konami ID + Email Fresh" },
+      { icon: "🌍", label: "Region", value: "Global (Asia)" },
+      { icon: "📱", label: "Google Play", value: "Bisa Login" },
+      { icon: "🍎", label: "iOS", value: "Bisa Login" },
+    ],
+    harga: 380000,
+    fotoLink: "#",
+  },
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "terjual",
+    nama: "Bellingham x Olmo",
+    foto: "https://i.postimg.cc/P5J2K74M/downloadgram-org-790755223-17946536529276126-8980689481832598547-n.webp",
+    badges: ["Rating SS 3050+", "3 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔑", label: "Login", value: "Konami ID + Email Fresh" },
+      { icon: "🌍", label: "Region", value: "Global (Asia)" },
+      { icon: "📱", label: "Google Play", value: "Bisa Login" },
+      { icon: "🍎", label: "iOS", value: "Bisa Login" },
+    ],
+    harga: 380000,
+    fotoLink: "#",
+  },
+  {
+    kode: "HIJAU",
+    tier: "hijau",
+    status: "terjual",
+    nama: "Neuer x Olise x Yamal",
+    foto: "https://i.postimg.cc/HsB6wmQQ/downloadgram-org-791325711-17946918090276126-6289983011031195482-n.webp",
+    badges: ["Rating SS 3050+", "3 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔑", label: "Login", value: "Konami ID + Email Fresh" },
+      { icon: "🌍", label: "Region", value: "Global (Asia)" },
+      { icon: "📱", label: "Google Play", value: "Bisa Login" },
+      { icon: "🍎", label: "iOS", value: "Bisa Login" },
+    ],
+    harga: 380000,
+    fotoLink: "#",
+  },
+  {
+    kode: "HIJAU",
+    tier: "biru",
+    status: "terjual",
+    nama: "Neuer x Olise x Yamal",
+    foto: "https://i.ibb.co/W43F4fDn/SOLD-KETUA.webp",
+    badges: ["Rating SS 3050+", "3 Epic Boosters", "Konami ID Clean"],
+    detail: [
+      { icon: "🔑", label: "Login", value: "Konami ID + Email Fresh" },
+      { icon: "🌍", label: "Region", value: "Global (Asia)" },
+      { icon: "📱", label: "Google Play", value: "Bisa Login" },
+      { icon: "🍎", label: "iOS", value: "Bisa Login" },
+    ],
+    harga: 380000,
+    fotoLink: "#",
+  },
+];
+
+let activeTier = "semua";
+const gridEl = document.getElementById("grid");
+
+document.getElementById("waFooterBtn").href = `https://wa.me/${CONFIG.waNumber}`;
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function formatRupiah(n){ return "Rp " + n.toLocaleString("id-ID"); }
+
+function discountPercent(hargaAsli, harga){
+  if(!hargaAsli || hargaAsli <= harga) return null;
+  return Math.round((1 - harga / hargaAsli) * 100);
+}
+
+function priceBlockHtml(acc){
+  const persen = discountPercent(acc.hargaAsli, acc.harga);
+  if(persen === null){
+    return `<div class="card-price"><span>${formatRupiah(acc.harga)}</span></div>`;
+  }
+  return `
+    <div class="card-price">
+      <div class="price-row">
+        <span class="price-old">${formatRupiah(acc.hargaAsli)}</span>
+        <span class="discount-badge">-${persen}%</span>
+      </div>
+      <span>${formatRupiah(acc.harga)}</span>
+    </div>`;
+}
+
+function render(){
+  const filtered = activeTier === "semua"
+    ? accounts
+    : accounts.filter(a => a.tier === activeTier);
+
+  const readyList = filtered.filter(a => a.status !== "terjual");
+
+  gridEl.innerHTML = "";
+
+  if(readyList.length === 0){
+    gridEl.innerHTML = `<div class="empty-state">Tidak ada akun ready yang cocok dengan filter kamu.</div>`;
+  } else {
+    readyList.forEach((acc, idx) => {
+      const waText = encodeURIComponent(`Halo admin, saya mau tanya soal akun ${acc.nama}`);
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.dataset.tier = acc.tier;
+      card.innerHTML = `
+        <button type="button" class="card-photo" data-open="${idx}" aria-label="Lihat spesifikasi lengkap">
+          <div class="photo-badges">
+            <span class="badge badge-ready">READY</span>
+            <span class="badge badge-code">${acc.kode}</span>
+          </div>
+          ${acc.foto ? `<img src="${acc.foto}" alt="${acc.nama}" loading="lazy">` : ""}
+        </button>
+        <div class="card-title">${acc.nama}</div>
+        ${priceBlockHtml(acc)}
+        <a class="btn-secondary" href="${acc.fotoLink}" target="_blank" rel="noopener">Lihat Foto Full Spek (Drive)</a>
+        <a class="btn-buy" href="https://wa.me/${CONFIG.waNumber}?text=${waText}" target="_blank" rel="noopener">Beli via WhatsApp</a>
+      `;
+      gridEl.appendChild(card);
+    });
+  }
+
+  window.__currentFiltered = readyList;
+  gridEl.querySelectorAll("[data-open]").forEach(btn => {
+    btn.addEventListener("click", () => openModal(window.__currentFiltered[Number(btn.dataset.open)]));
+  });
+}
+
+/* ---------- Strip "Sudah Terjual" (auto berjalan/carousel) ---------- */
+function renderSoldStrip(){
+  const soldSection = document.getElementById("soldSection");
+  const track = document.getElementById("marqueeTrack");
+  const soldList = accounts.filter(a => a.status === "terjual");
+
+  if(soldList.length === 0){
+    soldSection.style.display = "none";
+    return;
+  }
+
+  const miniCardHtml = (acc, i) => `
+    <div class="mini-card" data-tier="${acc.tier}" data-sold-open="${i}">
+      <div class="mini-card-top">
+        <span class="badge badge-sold">SOLD</span>
+        <span class="badge badge-code">${acc.kode}</span>
+      </div>
+      <div class="mini-photo">${acc.foto ? `<img src="${acc.foto}" alt="${acc.nama}" loading="lazy">` : ""}</div>
+      <div class="mini-card-title">${acc.nama}</div>
+      <div class="mini-card-tier">KATALOG ${acc.tier.toUpperCase()}</div>
+    </div>`;
+
+  const itemsHtml = soldList.map(miniCardHtml).join("");
+  // Konten diduplikasi 2x supaya animasinya bisa looping mulus tanpa putus
+  track.innerHTML = itemsHtml;
+}
+
+/* ---------- Pop-up detail akun ---------- */
+const modalOverlay = document.getElementById("modalOverlay");
+const modalGrid = document.getElementById("modalGrid");
+const modalClose = document.getElementById("modalClose");
+
+function openModal(acc){
+  const isSold = acc.status === "terjual";
+  const waText = encodeURIComponent(`Halo admin, saya mau tanya soal akun ${acc.nama}`);
+  const detailHtml = acc.detail.map(d => `
+    <div class="detail-row">
+      <span class="left">${d.icon || "•"} ${d.label}</span>
+      <span class="value">${d.value}</span>
+    </div>`).join("");
+  const persen = discountPercent(acc.hargaAsli, acc.harga);
+  const modalPriceHtml = persen === null
+    ? `<div class="modal-price">${formatRupiah(acc.harga)}</div>`
+    : `
+      <div class="modal-price-row">
+        <span class="modal-price-old">${formatRupiah(acc.hargaAsli)}</span>
+        <span class="discount-badge">-${persen}%</span>
+      </div>
+      <div class="modal-price">${formatRupiah(acc.harga)}</div>`;
+
+  modalGrid.innerHTML = `
+    <div class="card" data-tier="${acc.tier}" style="border:none; padding:0; gap:0;">
+      <div class="modal-photo" style="color:var(--${acc.tier}); border:1px solid rgba(255,255,255,.08);">
+        ${acc.foto ? `<img src="${acc.foto}" alt="${acc.nama}">` : ""}
+        <span class="badge badge-code" style="border-color:var(--${acc.tier}); color:var(--${acc.tier});">${acc.kode}</span>
+      </div>
+    </div>
+    <div>
+      <h3 class="modal-title">${acc.nama}</h3>
+      <div class="modal-detail">${detailHtml}</div>
+      <div class="modal-price-label">Harga</div>
+      ${modalPriceHtml}
+      <a class="modal-buy btn-buy" style="background:var(--${acc.tier}); color:#04150E;"
+         href="https://wa.me/${CONFIG.waNumber}?text=${waText}" target="_blank" rel="noopener">
+        ${isSold ? "Sudah Terjual" : "Beli Sekarang via WA"}
+      </a>
+    </div>
+  `;
+  modalOverlay.classList.add("open");
+}
+
+function closeModal(){ modalOverlay.classList.remove("open"); }
+
+modalClose.addEventListener("click", closeModal);
+modalOverlay.addEventListener("click", e => { if(e.target === modalOverlay) closeModal(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
+
+document.getElementById("tierFilters").querySelectorAll(".pill").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".pill").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeTier = btn.dataset.tier;
+    render();
+  });
+});
+
+render();
+renderSoldStrip();
+</script>
+</body>
+</html>
