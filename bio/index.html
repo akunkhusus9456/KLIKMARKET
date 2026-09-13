@@ -69,11 +69,18 @@
   }
 
   .link-icon{
-    flex:none; width:38px; height:38px; border-radius:10px;
+    flex:none; width:40px; height:40px; border-radius:11px;
     display:flex; align-items:center; justify-content:center;
-    font-size:18px; background:var(--surface-2); border:1px solid var(--border);
+    background:var(--surface-2); border:1px solid var(--border);
+    overflow:hidden;
   }
-  .link-btn.featured .link-icon{border-color:rgba(52,211,153,.5); color:var(--hijau);}
+  .link-icon svg{width:22px; height:22px;}
+  .link-icon.wa{background:#25D366;}
+  .link-icon.wa svg{fill:#04150E; width:20px; height:20px;}
+  .link-icon.ig{background:radial-gradient(circle at 30% 110%, #ffdb8b 0%, #ee2a7b 45%, #6228d7 90%);}
+  .link-icon.ig svg{fill:#fff;}
+  .link-icon.shop{color:var(--hijau);}
+  .link-icon.shop svg{fill:none; stroke:var(--hijau); stroke-width:1.8;}
 
   .link-text{flex:1;}
   .link-title{font-family:'Rajdhani',sans-serif; font-weight:700; font-size:15.5px;}
@@ -94,7 +101,9 @@
 
   <div class="links">
     <a class="link-btn featured" href="http://klikmarket.xyz" target="_blank" rel="noopener">
-      <span class="link-icon">🛒</span>
+      <span class="link-icon shop">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
       <span class="link-text">
         <div class="link-title">Beli Akun via Website</div>
         <div class="link-sub">Lihat katalog & harga terbaru</div>
@@ -102,7 +111,9 @@
     </a>
 
     <a class="link-btn" href="https://wa.me/6285123685805" target="_blank" rel="noopener">
-      <span class="link-icon">💬</span>
+      <span class="link-icon wa">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2m0 18.15c-1.51 0-2.99-.4-4.29-1.16l-.31-.18-3.19.84.85-3.11-.2-.32a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.28-8.29 8.28m4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.24-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.28"/></svg>
+      </span>
       <span class="link-text">
         <div class="link-title">WA Admin Klik</div>
         <div class="link-sub">Beli / Rekber</div>
@@ -110,7 +121,9 @@
     </a>
 
     <a class="link-btn" href="https://www.instagram.com/klikmarketofficial" target="_blank" rel="noopener">
-      <span class="link-icon">📷</span>
+      <span class="link-icon ig">
+        <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39A5.9 5.9 0 0 0 .62 4.14c-.3.76-.5 1.64-.56 2.91C0 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13a5.9 5.9 0 0 0 2.13 1.39c.76.3 1.64.5 2.91.56C8.33 24 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.39 5.9 5.9 0 0 0 1.39-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.39-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84Zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4Zm6.41-10.4a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44Z"/></svg>
+      </span>
       <span class="link-text">
         <div class="link-title">IG Klikmarket</div>
         <div class="link-sub">Update & promo terbaru</div>
@@ -118,7 +131,9 @@
     </a>
 
     <a class="link-btn" href="https://whatsapp.com/channel/0029VbDlbkM1CYoVur8nJv0m" target="_blank" rel="noopener">
-      <span class="link-icon">📦</span>
+      <span class="link-icon wa">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2m0 18.15c-1.51 0-2.99-.4-4.29-1.16l-.31-.18-3.19.84.85-3.11-.2-.32a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.28-8.29 8.28m4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.24-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.28"/></svg>
+      </span>
       <span class="link-text">
         <div class="link-title">Saluran Stock Klik</div>
         <div class="link-sub">Katalog & stock akun terbaru</div>
@@ -126,7 +141,9 @@
     </a>
 
     <a class="link-btn" href="https://whatsapp.com/channel/0029Vb8K5NM9MF8y1uY1yv2T" target="_blank" rel="noopener">
-      <span class="link-icon">⭐</span>
+      <span class="link-icon wa">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2m0 18.15c-1.51 0-2.99-.4-4.29-1.16l-.31-.18-3.19.84.85-3.11-.2-.32a8.19 8.19 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.28-8.29 8.28m4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.24-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.56.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.28"/></svg>
+      </span>
       <span class="link-text">
         <div class="link-title">Saluran Testimoni Klik</div>
         <div class="link-sub">Bukti transaksi & kepercayaan pembeli</div>
