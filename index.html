@@ -103,9 +103,16 @@
 
   /* ---------- Grid ---------- */
   .catalog{padding:40px 0 64px;}
-  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
-  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:600px){.grid{grid-template-columns:1fr;}}
+  .grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(3,1fr); gap:18px;}}
+  @media (max-width:600px){
+    .grid{grid-template-columns:repeat(2,1fr); gap:12px;}
+    .card{padding:12px; gap:10px;}
+    .card-photo{margin:-12px -12px 0 -12px; width:calc(100% + 24px);}
+    .card-title{font-size:13.5px;}
+    .card-price{font-size:18px;}
+    .btn-secondary, .btn-buy{padding:9px 8px; font-size:12px;}
+  }
 
   .card{
     background:var(--surface); border-radius:var(--radius-card);
