@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLIKMARKET — Link</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05070A;
+    --surface:#0C1210;
+    --surface-2:#111917;
+    --border:#1E2A26;
+    --text:#F2F5F4;
+    --text-muted:#8B9894;
+
+    --hijau:#34D399;
+    --hijau-soft:rgba(52,211,153,.12);
+    --biru:#38BDF8;
+    --emas:#F2B93B;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--text);
+    font-family:'Manrope', system-ui, sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    display:flex; justify-content:center;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  :focus-visible{outline:2px solid var(--hijau); outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+
+  .page{width:100%; max-width:460px; padding:56px 22px 40px; text-align:center;}
+
+  .avatar{
+    width:88px; height:88px; border-radius:50%; margin:0 auto 18px;
+    overflow:hidden; border:2px solid rgba(52,211,153,.5);
+    background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center; padding:14px;
+  }
+  .avatar img{width:100%; height:100%; object-fit:contain;}
+
+  .handle{
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-size:22px; letter-spacing:.3px;
+    background:linear-gradient(90deg, var(--hijau), #7FF3C6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin-bottom:8px;
+  }
+  .tagline{color:var(--text-muted); font-size:14px; max-width:34ch; margin:0 auto 34px;}
+
+  .links{display:flex; flex-direction:column; gap:14px;}
+
+  .link-btn{
+    display:flex; align-items:center; gap:14px;
+    padding:16px 18px; border-radius:14px;
+    background:var(--surface); border:1px solid var(--border);
+    text-align:left; transition:border-color .15s, transform .1s;
+  }
+  .link-btn:hover{border-color:var(--hijau);}
+  .link-btn:active{transform:scale(.98);}
+
+  .link-btn.featured{
+    border-color:rgba(52,211,153,.5); background:var(--hijau-soft);
+  }
+
+  .link-icon{
+    flex:none; width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; background:var(--surface-2); border:1px solid var(--border);
+  }
+  .link-btn.featured .link-icon{border-color:rgba(52,211,153,.5); color:var(--hijau);}
+
+  .link-text{flex:1;}
+  .link-title{font-family:'Rajdhani',sans-serif; font-weight:700; font-size:15.5px;}
+  .link-sub{color:var(--text-muted); font-size:12px; margin-top:2px;}
+
+  .footer{margin-top:40px; color:var(--text-muted); font-size:12px;}
+  .footer a{color:var(--hijau); font-weight:600;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="avatar">
+    <img src="logo.png" alt="KLIKMARKET">
+  </div>
+  <div class="handle">@klikstoreid</div>
+  <p class="tagline">Market jual beli akun eFootball murah, aman, dan terpercaya.</p>
+
+  <div class="links">
+    <a class="link-btn featured" href="http://klikmarket.xyz" target="_blank" rel="noopener">
+      <span class="link-icon">🛒</span>
+      <span class="link-text">
+        <div class="link-title">Beli Akun via Website</div>
+        <div class="link-sub">Lihat katalog & harga terbaru</div>
+      </span>
+    </a>
+
+    <a class="link-btn" href="https://wa.me/6285123685805" target="_blank" rel="noopener">
+      <span class="link-icon">💬</span>
+      <span class="link-text">
+        <div class="link-title">WA Admin Klik</div>
+        <div class="link-sub">Beli / Rekber</div>
+      </span>
+    </a>
+
+    <a class="link-btn" href="https://www.instagram.com/klikmarketofficial" target="_blank" rel="noopener">
+      <span class="link-icon">📷</span>
+      <span class="link-text">
+        <div class="link-title">IG Klikmarket</div>
+        <div class="link-sub">Update & promo terbaru</div>
+      </span>
+    </a>
+
+    <a class="link-btn" href="https://whatsapp.com/channel/0029VbDlbkM1CYoVur8nJv0m" target="_blank" rel="noopener">
+      <span class="link-icon">📦</span>
+      <span class="link-text">
+        <div class="link-title">Saluran Stock Klik</div>
+        <div class="link-sub">Katalog & stock akun terbaru</div>
+      </span>
+    </a>
+
+    <a class="link-btn" href="https://whatsapp.com/channel/0029Vb8K5NM9MF8y1uY1yv2T" target="_blank" rel="noopener">
+      <span class="link-icon">⭐</span>
+      <span class="link-text">
+        <div class="link-title">Saluran Testimoni Klik</div>
+        <div class="link-sub">Bukti transaksi & kepercayaan pembeli</div>
+      </span>
+    </a>
+  </div>
+
+  <div class="footer">© <span id="year"></span> KLIKMARKET</div>
+</div>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
