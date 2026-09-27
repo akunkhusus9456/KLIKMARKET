@@ -7,6 +7,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#05070A;
@@ -57,11 +58,67 @@
   .brand-name{
     display:inline-flex; align-items:center; gap:10px;
     font-family:'Rajdhani',sans-serif; font-weight:700; font-size:21px; letter-spacing:.3px;
-    background:linear-gradient(90deg, var(--hijau), #7FF3C6);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   .brand-logo{
     height:32px; width:auto; object-fit:contain;
+  }
+
+  /* ---------- Animated logo ---------- */
+  .logo-icon{ width:30px; height:30px; overflow:visible; flex:none; }
+  .logo-handle{
+    fill:none; stroke:url(#logoGradLine); stroke-width:7; stroke-linecap:round;
+    stroke-dasharray:90; stroke-dashoffset:90;
+    animation:logoDraw .5s .1s ease-out forwards;
+  }
+  @keyframes logoDraw{ to{ stroke-dashoffset:0; } }
+  .logo-bag{
+    fill:url(#logoGradFill); stroke:#04140d; stroke-width:2.5;
+    opacity:0; transform-origin:50px 65px; transform:scale(.6);
+    animation:logoPopIn .4s .55s cubic-bezier(.25,.9,.3,1.4) forwards;
+    filter:drop-shadow(0 0 6px rgba(52,211,153,.5));
+  }
+  .logo-cursor{
+    opacity:0; transform-origin:78px 82px; transform:scale(.4) rotate(-10deg);
+    animation:logoPopIn .35s .95s cubic-bezier(.25,.9,.3,1.5) forwards;
+  }
+  .logo-cursor path{ fill:var(--hijau); stroke:#04140d; stroke-width:2.5; stroke-linejoin:round; }
+  @keyframes logoPopIn{
+    0%{ opacity:0; } 55%{ opacity:1; }
+    100%{ opacity:1; transform:scale(1) rotate(0deg); }
+  }
+  .logo-ripple{
+    fill:none; stroke:var(--hijau); stroke-width:2.5; opacity:0;
+    transform-origin:78px 82px; animation:logoRipple 3.6s 1.2s ease-out infinite;
+  }
+  @keyframes logoRipple{
+    0%{ opacity:.9; transform:scale(.3); }
+    18%{ opacity:0; transform:scale(1.6); }
+    100%{ opacity:0; transform:scale(1.6); }
+  }
+  .logo-word{
+    font-family:'Orbitron', 'Rajdhani', sans-serif; font-weight:800; letter-spacing:1px;
+    font-size:21px; display:flex;
+  }
+  .logo-word span{
+    display:inline-block; opacity:0; transform:translateY(-6px) scale(1.2);
+    background:linear-gradient(90deg, var(--hijau), #7FF3C6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:logoLetter .3s cubic-bezier(.2,.9,.3,1.3) forwards;
+  }
+  .logo-word span:nth-child(1){animation-delay:1.05s;}
+  .logo-word span:nth-child(2){animation-delay:1.13s;}
+  .logo-word span:nth-child(3){animation-delay:1.21s;}
+  .logo-word span:nth-child(4){animation-delay:1.29s;}
+  .logo-word span:nth-child(5){animation-delay:1.37s;}
+  .logo-word span:nth-child(6){animation-delay:1.45s;}
+  .logo-word span:nth-child(7){animation-delay:1.53s;}
+  .logo-word span:nth-child(8){animation-delay:1.61s;}
+  .logo-word span:nth-child(9){animation-delay:1.69s;}
+  .logo-word span:nth-child(10){animation-delay:1.77s;}
+  @keyframes logoLetter{
+    0%{ opacity:0; transform:translateY(-6px) scale(1.2); }
+    60%{ opacity:1; transform:translateY(1px) scale(.97); }
+    100%{ opacity:1; transform:translateY(0) scale(1); }
   }
   nav.links{display:flex; align-items:center; gap:26px;}
   .btn-support{
@@ -338,14 +395,46 @@
 
 <header class="site">
   <div class="nav wrap">
-    <!-- Sisipkan tag <img> di dalam brand-name / di sebelah teks -->
+    <!-- Logo animasi -->
     <span class="brand-name">
-      <img src="logo.png" alt="Logo Klikmarket" class="brand-logo">
-      <span>KLIKMARKET</span>
+      <svg class="logo-icon" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="logoGradLine" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#7FF3C6"/>
+          </linearGradient>
+          <linearGradient id="logoGradFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#7FF3C6"/>
+          </linearGradient>
+        </defs>
+        <path class="logo-handle" d="M33,38 Q33,14 50,14 Q67,14 67,38" />
+        <rect class="logo-bag" x="20" y="36" width="60" height="50" rx="7" />
+        <circle class="logo-ripple" cx="78" cy="82" r="14" />
+        <g class="logo-cursor"><path d="M68,66 L68,98 L76,90 L82,102 L88,99 L82,87 L92,87 Z" /></g>
+      </svg>
+      <span class="logo-word" id="brandWord"></span>
     </span>
     <a class="btn-support" href="/bio" target="_blank" rel="noopener"> <span class="label">Link Atmin</span></a>
   </div>
 </header>
+
+<script>
+  var brandText = "KLIKMARKET";
+  var brandEl = document.getElementById('brandWord');
+  brandText.split('').forEach(function(ch){
+    var span = document.createElement('span');
+    span.textContent = ch;
+    brandEl.appendChild(span);
+  });
+
+  // Ulangi seluruh animasi logo (ikon + tulisan) dari awal setiap 5 detik
+  function replayLogoAnim(){
+    var els = document.querySelectorAll('.logo-handle, .logo-bag, .logo-cursor, .logo-ripple, .logo-word span');
+    els.forEach(function(el){ el.style.animation = 'none'; });
+    void document.body.offsetWidth; // paksa reflow
+    els.forEach(function(el){ el.style.animation = ''; });
+  }
+  setInterval(replayLogoAnim, 5000);
+</script>
 
 <section class="hero">
   <div class="wrap">
