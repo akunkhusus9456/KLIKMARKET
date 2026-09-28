@@ -38,14 +38,35 @@
   .page{width:100%; max-width:460px; padding:56px 22px 40px; text-align:center;}
 
   .avatar{
-    width:88px; height:88px; border-radius:50%; margin:0 auto 18px;
-    overflow:hidden; border:2px solid rgba(52,211,153,.5);
-    background:var(--surface-2);
-    position:relative;
+    width:128px; height:128px; border-radius:50%; margin:0 auto 18px;
+    background:#000; position:relative; overflow:hidden;
+    border:2px solid #39FF14;
+    box-shadow:0 0 14px rgba(57,255,20,.5), 0 0 34px rgba(57,255,20,.22);
+    animation:boxPulse 3s ease-in-out infinite;
   }
-  .avatar img, .avatar video{
-    width:100%; height:100%; object-fit:cover; object-position:center;
-    position:absolute; top:0; left:0;
+  .logo{display:block; width:100%; height:100%; filter:drop-shadow(0 0 4px rgba(57,255,20,.8)); animation:glow 3s ease-in-out infinite;}
+  .logo .o{fill:rgba(57,255,20,0); stroke:#39FF14; stroke-width:17; stroke-dasharray:1; stroke-dashoffset:1;
+    animation:draw 8s cubic-bezier(.5,0,.2,1) infinite, fillIn 8s ease infinite;}
+  .logo .core{fill:none; stroke:#DFFFD0; stroke-width:4; stroke-dasharray:1; stroke-dashoffset:1;
+    animation:draw 8s cubic-bezier(.5,0,.2,1) infinite;}
+  .logo .t{fill:none; stroke:#39FF14; stroke-width:6; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:1; stroke-dashoffset:1; animation:drawT 8s ease-out infinite;}
+  .logo .ring{fill:none; stroke:#39FF14; stroke-width:9; stroke-dasharray:60 40 10 40; opacity:.85;
+    transform-box:fill-box; transform-origin:center; animation:spin 14s linear infinite;}
+  .logo .scan{animation:scan 2.6s linear infinite;}
+  .logo .lg{animation:glitch 4.5s infinite;}
+  @keyframes draw{0%{stroke-dashoffset:1;opacity:1}24%,88%{stroke-dashoffset:0;opacity:1}97%{stroke-dashoffset:0;opacity:0}100%{stroke-dashoffset:1;opacity:0}}
+  @keyframes drawT{0%,14%{stroke-dashoffset:1;opacity:.75}32%,88%{stroke-dashoffset:0;opacity:.75}97%{stroke-dashoffset:0;opacity:0}100%{stroke-dashoffset:1;opacity:0}}
+  @keyframes fillIn{0%,16%{fill:rgba(57,255,20,0)}30%,88%{fill:rgba(57,255,20,.09)}97%,100%{fill:rgba(57,255,20,0)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes scan{from{transform:translateY(0)}to{transform:translateY(2000px)}}
+  @keyframes glitch{0%,90%,100%{transform:none}91%{transform:translateX(-22px)}93%{transform:translateX(26px)}95%{transform:translateX(-8px)}}
+  @keyframes glow{0%,100%{filter:drop-shadow(0 0 3px rgba(57,255,20,.7))}50%{filter:drop-shadow(0 0 10px rgba(57,255,20,1))}}
+  @keyframes boxPulse{0%,100%{box-shadow:0 0 12px rgba(57,255,20,.4), 0 0 28px rgba(57,255,20,.16)}50%{box-shadow:0 0 22px rgba(57,255,20,.85), 0 0 48px rgba(57,255,20,.4)}}
+  @media (prefers-reduced-motion:reduce){
+    .avatar,.logo,.logo *{animation:none !important;}
+    .logo .o,.logo .core,.logo .t{stroke-dashoffset:0;}
+    .logo .scan{display:none;}
   }
 
   .handle{
@@ -97,7 +118,11 @@
 <div class="page">
 
   <div class="avatar">
-    <video src="logo.mp4" autoplay muted loop playsinline></video>
+    <svg class="logo" viewBox="62 37 1800 1800" role="img" aria-label="Logo KLIKMARKET"><defs><path id="pk" pathLength="1" d="M843 340L810 590L780 615L745 830L1015 548L1232 548L955 835L860 915L1078 1180L1062 1430L735 1030L690 1280L435 1535L575 590Z"/><path id="pm" pathLength="1" d="M860 915L955 835L1060 965L1490 500L1450 1285L1225 1510L1255 1320L1275 1300L1298 945L1078 1180Z"/><path id="t0" pathLength="1" d="M620 640L590 900L540 1150L500 1400"/><path id="t1" pathLength="1" d="M700 620L670 860L620 1050L590 1250"/><path id="t2" pathLength="1" d="M830 860L1050 640L1150 600"/><path id="t3" pathLength="1" d="M830 1000L900 1100L985 1200L1035 1300"/><path id="t4" pathLength="1" d="M1400 620L1380 900L1350 1100L1330 1330"/><path id="t5" pathLength="1" d="M1100 940L1250 780L1380 640"/><clipPath id="cl"><use href="#pk"/><use href="#pm"/></clipPath><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9dff7a" stop-opacity="0"/><stop offset=".6" stop-color="#d8ffc8" stop-opacity=".95"/><stop offset="1" stop-color="#9dff7a" stop-opacity="0"/></linearGradient></defs>
+      <circle class="ring" cx="962" cy="937" r="860"/>
+      <g class="lg"><use href="#pk" class="o"/><use href="#pm" class="o"/><use href="#pk" class="core"/><use href="#pm" class="core"/><use href="#t0" class="t"/><use href="#t1" class="t"/><use href="#t2" class="t"/><use href="#t3" class="t"/><use href="#t4" class="t"/><use href="#t5" class="t"/></g>
+      <g clip-path="url(#cl)"><rect class="scan" x="62" y="-250" width="1800" height="330" fill="url(#sg)"/></g>
+    </svg>
   </div>
   <div class="handle">@KLIKMARKETOFFICIAL</div>
   <p class="tagline">Market jual beli akun eFootball murah, aman, dan terpercaya.</p>
